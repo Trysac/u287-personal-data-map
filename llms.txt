@@ -1,0 +1,16 @@
+# personal-data-map
+
+> Map personal data in SQL schemas: parse CREATE TABLE statements, classify columns by token-based name rules, flag special categories and trace subject links via foreign keys Python package `trysac-personal-data-map`, import name `personal_data_map`, MIT licensed,
+> Python >= 3.10, no runtime dependencies.
+
+## Docs
+
+- [README](README.md): problem, install, usage example
+- [AGENTS](AGENTS.md): commands, folder map, conventions, limits
+- [Architecture](docs/ARCHITECTURE.md): shape of the package and its public API
+- [Testing](docs/TESTING.md): how to run and extend the tests
+
+## Optional
+
+- [Stack](docs/STACK.md): tools used and discarded
+- [Changelog](CHANGELOG.md): release history
