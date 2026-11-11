@@ -1,20 +1,21 @@
-# 1. Record architecture decisions
+# 0001 — Record architecture decisions
 
 - Status: accepted
-- Date: 2026
+- Date: 2026-01-01
 
 ## Context
 
-Decisions about this utility (dependencies, public API shape, supported Python versions) must stay
-understandable for future maintainers and for the agents that change the code.
+Design choices that are not obvious from the code should stay discoverable as the project grows.
+Reviewers need to know why a limit or a default exists, and future changes should justify themselves
+against the original reasoning.
 
 ## Decision
 
-We record every significant decision as an Architecture Decision Record in `docs/decisions/`, named
-`NNNN-short-title.md`, with the sections Context, Decision and Consequences. ADRs are immutable once
-accepted; a later ADR supersedes an earlier one explicitly.
+Record every significant design choice as a numbered ADR in `docs/decisions/`, using the filename
+pattern `NNNN-short-title.md`. Each record states its context, the decision and the consequences.
 
 ## Consequences
 
-- Reviewers can see why the code is the way it is without reading the whole history.
-- Adding a runtime dependency or changing the public API requires a new ADR.
+- The reasoning behind defaults such as the 5 MiB input bound, the 32-level parenthesis limit and
+  the priority order of `DEFAULT_RULES` is written down once instead of re-litigated per change.
+- Adding an option or dependency requires a new ADR in the same pull request.

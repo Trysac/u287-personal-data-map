@@ -9,4 +9,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Added personal_data_map: parse DDL CREATE TABLE statements, classify columns into personal-data categories, trace subject links through foreign keys, render JSON/Markdown data maps, and provide a CLI.
 - Initial project structure from the factory utility template.

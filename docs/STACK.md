@@ -1,23 +1,14 @@
 # Stack
 
-## Used
+| Concern | Choice | Notes |
+|---|---|---|
+| Language | Python >= 3.10 | Uses `from __future__ import annotations` and PEP 604 syntax. |
+| Packaging | Hatchling (`pyproject.toml`) | `src/` layout, `py.typed` ships with the package. |
+| Runtime dependencies | none | The parser, classifier and renderers are standard library only. |
+| Lint and format | Ruff | `E`, `F`, `W`, `I`, `B`, `UP`, `SIM`, `S`, `RUF`; line length 100. |
+| Types | mypy | `strict = true`, `files = ["src"]`. |
+| Tests | pytest + pytest-cov | Branch coverage, `fail_under = 80`, `testpaths = ["tests"]`. |
+| Docs gate | `docs-manifest.json` | Lists the documentation files a release must contain. |
+| Secrets | gitleaks | Blocks committed credentials. |
 
-| Tool | Why |
-|---|---|
-| Python >= 3.10 | Widest supported range that still allows modern typing syntax. |
-| uv | Fast, reproducible environments and builds on Windows and Linux. |
-| hatchling | Simple, standards-based build backend; no setup.py. |
-| ruff | Lint and format in one fast tool. |
-| mypy (strict) | Catches type errors before release; the package ships `py.typed`. |
-| pytest + pytest-cov | De facto standard test runner with branch coverage. |
-| gitleaks | Secret scanning locally and in CI. |
-| GitHub Actions + Dependabot | Thin CI wrapper over the local gates; weekly dependency updates. |
-
-## Discarded
-
-| Tool | Why not |
-|---|---|
-| Poetry | Slower, and uv covers the same needs with standard dependency groups. |
-| black + isort + flake8 | Replaced by ruff: one tool instead of three. |
-| tox / nox | The OS matrix lives in CI; locally a single `scripts/check.py` is enough. |
-| Shell scripts for gates | Not portable to Windows; the gates are a stdlib Python script. |
+There is no database driver, ORM or web framework: the library operates on schema text only.

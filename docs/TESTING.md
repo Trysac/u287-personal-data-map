@@ -1,29 +1,18 @@
 # Testing
 
-## Running
+Tests live in `tests/test_personal_data_map.py` and exercise the public API.
 
 ```sh
-uv run pytest --cov=personal_data_map   # tests with coverage report
-uv run python scripts/check.py      # every gate, as CI and the factory run it
+pytest tests/test_personal_data_map.py
 ```
 
-## Policy
+## What the suite covers
 
-- Branch coverage of `src/personal_data_map` must stay at or above 80 %; the gate fails below it.
-- Tests exercise the public API (`import personal_data_map`) and assert every observable effect:
-  return values, raised exceptions and their messages.
-- Each bug fix starts with a failing test that reproduces it.
-- Tests are deterministic: no network, no wall clock, no dependence on test order.
-
-## Tiers
-
-- Local tier (every gate run, coverage measured here): unit and property tests, plus conformance on small
-  fixtures kept in the repository.
-- CI tier: conformance that needs an external tool or a download. Mark them `@pytest.mark.conformance`; `scripts/check.py` deselects them locally
-  (unless `FABRICA_CI=1`). The CI `conformance` job sets `FABRICA_CI=1` and runs the full suite. Tools are installed
-  by the optional `ci/conformance-setup.sh` (bash, CI only; verify every download against a pinned SHA-256), and
-  tagged tests skip cleanly when their tool is missing.
-
-## Layout
-
-`tests/test_<module>.py` mirrors each public module. Shared fixtures go in `tests/conftest.py`.
+- `parse_ddl` on a simple `CREATE TABLE` (`test_parse_simple`): table name, column names, and references.
+- `classify` on a basic schema (`test_classify_basic`): column categories, table roles, and `special_category_tables`.
+- Acceptance examples: `users.email` as `direct_identifier`; `users` as `subject`; `orders` and `audit` as `linked` with shortest `via` paths; whole-token matching for names such as `emailed_at`, `ship_date`, `latency_ms`, and `zipped_size`; `patients.diagnosis_code` as `special_category`.
+- Parsing cases: quoted names, `--` comments, string literals containing `)`, skipped non-`CREATE TABLE` statements, `public.users`, `CREATE TABLE ... AS SELECT`, and MySQL `ENGINE=InnoDB` suffixes.
+- Error paths: `input_too_large`, `parse_error` including the parenthesis depth limit, `too_many_tables`, `invalid_override`, and `invalid_rule`.
+- Rendering: exact Markdown output for the `users` schema and sorted, two-space-indented JSON.
+- CLI `main`: `--fail-on` matching a category, parse errors, usage errors, and IO errors.
+- Edge cases: reference cycles, self-references, and schema-qualified names.
