@@ -19,6 +19,9 @@ classifiers = [
 ]
 dependencies = []
 
+[project.scripts]
+personal-data-map = "personal_data_map.__main__:main"
+
 [project.urls]
 Homepage = "https://github.com/Trysac/u287-personal-data-map"
 Source = "https://github.com/Trysac/u287-personal-data-map"
